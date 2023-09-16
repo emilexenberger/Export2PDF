@@ -63,7 +63,7 @@ public class Kniha implements Serializable {
         return "Kniha: " +
                 "nazov = " + nazov +
                 ", autor = " + autor +
-                ", rokVydania = " + rokVydania +
+                ", rok vydania = " + rokVydania +
                 ", cena = " + cena ;
     }
 
@@ -71,7 +71,7 @@ public class Kniha implements Serializable {
         return "Kniha c. " + index + ": " +
                 "nazov = " + nazov +
                 ", autor = " + autor +
-                ", rokVydania = " + rokVydania +
+                ", rok vydania = " + rokVydania +
                 ", cena = " + cena;
     }
 }
