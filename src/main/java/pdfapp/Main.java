@@ -1,3 +1,5 @@
+package pdfapp;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -9,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class JavaPdfHelloWorld {
+public class Main {
     public static void main(String[] args) {
         Document document = new Document();
 

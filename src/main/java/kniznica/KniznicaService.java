@@ -10,6 +10,9 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,6 +63,10 @@ public class KniznicaService {
                     printToPDF();
                     System.out.println("kniznica bola exportovana ako kniznica.pdf");
                 }
+                case "12" -> {
+                    printToDocx();
+                    System.out.println("kniznica bola exportovana ako kniznica.docx");
+                }
                 default -> System.out.println("Nezadal si spravny vstup");
             }
             System.out.println();
@@ -80,9 +87,32 @@ public class KniznicaService {
                 [9]  Uprav knihu
                 [10] Vymaž všetky knihy
                 [11] Export do PDF
+                [12] Export do DOCX
                 [koniec] Ukonci program""");
         System.out.print("Zadaj vstup: ");
         return sc.nextLine();
+    }
+
+    public void printToDocx() {
+        XWPFDocument document = new XWPFDocument();
+
+        XWPFParagraph paragraph = document.createParagraph();
+        XWPFRun run = paragraph.createRun();
+
+        String text;
+        for (int i = 0; i < kniznica.size(); i++) {
+            text = kniznica.get(i).toStringWithIndex(i + 1);
+            run.setText(text);
+            run.addBreak(); // Add line break after each book
+        }
+
+        try (FileOutputStream out = new FileOutputStream("kniznica.docx")) {
+            document.write(out);
+            document.close();
+            System.out.println("DOCX file created successfully!");
+        } catch (IOException e) {
+            System.out.println("Error creating DOCX file: " + e.getMessage());
+        }
     }
 
     public void printToPDF() {
